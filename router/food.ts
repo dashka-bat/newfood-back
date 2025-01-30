@@ -2,8 +2,7 @@ import { Request, Response, Router } from "express";
 import { FoodModel } from "../models/food";
 export const food_router = Router();
 food_router.get("/", async (req: Request, res: Response) => {
-  const filter =
-    req?.query?.category !== "" ? { category: req.query.category } : {};
+  const filter = req?.query?.category ? { category: req.query.category } : {};
 
   const food = await FoodModel.find(filter).populate("category");
 
