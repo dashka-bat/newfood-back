@@ -15,19 +15,20 @@ food_router.get("/:id", async (req: Request, res: Response) => {
   res.json({ foodname });
 });
 food_router.post("/", async (req: Request, res: Response) => {
+// const filter=req?.body?.category?{category:req.body.category}:{}
   const name = req?.body.foodName;
   const price = req?.body.price;
   const image = req?.body.image;
   const ingerdients = req?.body.ingerdients;
-  const category = req?.body.category;
-  const foodname = await FoodModel.create({
+  // const category = req?.body.category;
+  const newItem = await FoodModel.create({
     foodName: name,
     price: price,
     image: image,
     ingerdients: ingerdients,
-    category: category,
+    category: req.body.category,
   });
-  res.json({ foodname });
+  res.json({ newItem });
 });
 food_router.delete("/:id", async (req: Request, res: Response) => {
   const foodname = await FoodModel.findByIdAndDelete(req.params.id);
